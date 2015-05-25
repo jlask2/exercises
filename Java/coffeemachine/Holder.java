@@ -6,7 +6,7 @@ package coffeemachine;
 /**
  * @author Jay
  *
- */
+ */            
 public final class Holder {
 	
 	private String type;

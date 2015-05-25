@@ -16,17 +16,17 @@ public class TestCoffeeMachine {
 		Coffee coffee = new Coffee("Maxwell House", "k-cup", (float)1.00, 8);
 		Holder holder = new Holder("Cup", 10);
 		String[] coffeetypes = {"coffee", "expresso", "k-cup"};
-		Keurig keurig = new Keurig("Keurig 2.0", coffeetypes, (float)120.00, 123456);
-		keurig.setPower(true);
-		keurig.setHolder(holder);
-		holder.setHolderPresence(true, keurig.holderPresentState());
-		keurig.fillWater(12);
-		keurig.brew(8, holder, coffee);
+		CoffeeMaker coffeeMaker = new CoffeeMaker("Keurig 2.0", coffeetypes, (float)120.00, 123456);
+		coffeeMaker.setPower(true);
+		coffeeMaker.setHolder(holder);
+		holder.setHolderPresence(true, coffeeMaker.holderPresentState());
+		coffeeMaker.fillWater(12);
+		coffeeMaker.brew(8, holder, coffee);
 	}
 	
 	public void menu(){
 		
-		switch(choice){
+		/*switch(choice){
 		case 0:
 			if(CoffeeMachine.getPower() == false){
 				CoffeeMachine.setPower(true);
@@ -39,8 +39,8 @@ public class TestCoffeeMachine {
 		case 2:
 			break;
 		default:
-			break;
-		}
+			break;*/
+		//}
 	}
 
 }

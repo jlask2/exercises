@@ -2,7 +2,7 @@ package coffeemachine;
 
 import java.util.Scanner;
 
-public class Keurig extends CoffeeMachine {
+public class CoffeeMaker extends CoffeeMachine {
 
 	/**Members for Specs*/
 	private String brand;
@@ -23,7 +23,7 @@ public class Keurig extends CoffeeMachine {
 	
 	final private int MAXWATERCAPACITY = 25;
 
-	public Keurig(String brand, String[] acceptedTypesOfCoffee, float price, int model,
+	/*public CoffeeMaker(String brand, String[] acceptedTypesOfCoffee, float price, int model,
 			int currentWater, boolean occupiedWithHolder, boolean power, int amountOfCoffeeBrewed){
 		this.brand = brand;
 		this.acceptedTypesOfCoffee = acceptedTypesOfCoffee;
@@ -33,9 +33,9 @@ public class Keurig extends CoffeeMachine {
 		this.occupiedWithHolder = occupiedWithHolder;
 		this.power = power;
 		this.amountOfCoffeeBrewed = amountOfCoffeeBrewed;
-	}
+	}*/
 	
-	public Keurig(String brand, String[] acceptedTypesOfCoffee, float price, int model){
+	public CoffeeMaker(String brand, String[] acceptedTypesOfCoffee, float price, int model){
 		this.brand = brand;
 		this.acceptedTypesOfCoffee = acceptedTypesOfCoffee;
 		this.price = price;
