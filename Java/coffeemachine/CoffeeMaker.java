@@ -31,12 +31,12 @@ public class CoffeeMaker extends CoffeeMachine {
 		this.acceptedTypesOfCoffee = acceptedTypesOfCoffee;
 		this.price = price;
 		this.model = model;
-		specString = "Specifications of Coffee Machine:\n\tBrand: \t"+this.brand+"\n\tAcceptedTypesOfCoffee: \t";
+		specString = "Specifications of Coffee Machine:\n\tBrand: \t\t\t\t"+this.brand+"\n\tAcceptedTypesOfCoffee: \t\t";
 		Iterator<String> ite = this.acceptedTypesOfCoffee.iterator();
 		while(ite.hasNext()){
 			specString += ite.next()+" ";
 		}
-		specString += "\n\tPrice: \t"+this.price+"\n\tModel: \t"+this.model+"\n";
+		specString += "\n\tPrice: \t\t\t\t"+this.price+"\n\tModel: \t\t\t\t"+this.model+"\n";
 	}
 	
 	@Override
@@ -120,7 +120,8 @@ public class CoffeeMaker extends CoffeeMachine {
 						}else{
 							amountOfCoffeeBrewed = sizeSelected;
 						}
-						System.out.println("Cup O' Java Successfully Brewed! \n\n"+toString());
+						holder.setCurrentFill(amountOfCoffeeBrewed);
+						System.out.println("Cup O' Java Successfully Brewed! \n\n");
 					}
 				}else{
 					System.out.println("Would you like to add some water? y/n \n");
@@ -139,7 +140,17 @@ public class CoffeeMaker extends CoffeeMachine {
 							}else{
 								amountOfCoffeeBrewed = sizeSelected;
 							}
-							System.out.println("Cup O' Java Successfully Brewed! \n\n"+toString());
+							holder.setCurrentFill(amountOfCoffeeBrewed);
+							System.out.println("Cup O' Java Successfully Brewed! \n\n");
+						}else{
+							if(currentWater < 0){
+								amountOfCoffeeBrewed = sizeSelected + currentWater;
+								currentWater = 0;
+							}else{
+								amountOfCoffeeBrewed = sizeSelected;
+							}
+							holder.setCurrentFill(amountOfCoffeeBrewed);
+							System.out.println("Cup O' Java Successfully Brewed! \n\n");
 						}
 					}else{
 						if(!holderFillCapacityExceeded(sizeSelected, holder)){
@@ -150,7 +161,17 @@ public class CoffeeMaker extends CoffeeMachine {
 							}else{
 								amountOfCoffeeBrewed = sizeSelected;
 							}
-							System.out.println("Cup O' Java Successfully Brewed! \n\n"+toString());
+							holder.setCurrentFill(amountOfCoffeeBrewed);
+							System.out.println("Cup O' Java Successfully Brewed! \n\n");
+						}else{
+							if(currentWater < 0){
+								amountOfCoffeeBrewed = sizeSelected + currentWater;
+								currentWater = 0;
+							}else{
+								amountOfCoffeeBrewed = sizeSelected;
+							}
+							holder.setCurrentFill(amountOfCoffeeBrewed);
+							System.out.println("Cup O' Java Successfully Brewed! \n\n");
 						}
 					}
 				}
@@ -180,8 +201,8 @@ public class CoffeeMaker extends CoffeeMachine {
 	@Override
     public String toString(){
 		stateString = specString+"Stats of Coffee Machine System State: \n";
-		stateString += "\tPowered ON: \t"+power+"\n\tCurrent Water Level:\t"
-				+currentWater+"\n\tCup Holder Occuppied: \t"
+		stateString += "\tPowered ON: \t\t\t"+power+"\n\tCurrent Water Level:\t\t"
+				+currentWater+"\n\tCup Holder Occuppied: \t\t"
 				+holderPresent+"\n\tAmount of Coffee Brewed: \t"
 				+amountOfCoffeeBrewed+"\n";
 		return stateString;

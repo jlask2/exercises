@@ -68,8 +68,21 @@ public class TestCoffeeMachine {
 		amtToBrew = 8;
 	
 		coffeeMaker.fillWater(amtToAdd);
+		
+		System.out.println("This is the initial test run of my Virtual Coffee Machine System.\n\n" +
+				"This is the pre-condition of the test run with hard coded values:\n\n"
+		+coffeeMaker.toString()
+		+holder.toString()
+		+coffee.toString());
+		
 		coffeeMaker.brew(amtToBrew, holder, coffee);
 		
+		System.out.println("This is the post-condition of the test run with hard coded values:\n\n"
+				+coffeeMaker.toString()
+				+holder.toString()
+				+coffee.toString());
+		
+		System.out.println("\nHere is a interactive loop to test different aspects of the system.\n\n");
 		do{
 			System.out.println("Would you like to use a different coffee machine?");
 			ans = scan.next();
@@ -85,15 +98,16 @@ public class TestCoffeeMachine {
 				String line = "";
 				
 				line = scan.next()+" ";
-				acceptedTypes = line.split("");
+				acceptedTypes = line.split(" ");
 				coffeeTypes = new ArrayList<String>();
 				for(int i = 0; i < acceptedTypes.length; i++){
 					coffeeTypes.add(acceptedTypes[i]);
 				}
 				coffeeMaker = new CoffeeMaker(brand, coffeeTypes, price, model);
-				System.out.println("New machine:\n"+coffeeMaker.toString()+"\n");
+				System.out.println("Initial condition of new machine:\n"+coffeeMaker.toString()+"\n");
+				
 			}else{
-				System.out.println("Using the previous machine:\n"+coffeeMaker.toString()+"\n");
+				System.out.println("Using the previous machine and state:\n"+coffeeMaker.toString()+"\n");
 			}
 			System.out.println("Would you like to use a new holder?\n");
 			ans = scan.next();
@@ -103,9 +117,9 @@ public class TestCoffeeMachine {
 				System.out.println("Enter the max filling capacity of this holder:\n");
 				holderCapacity = scan.nextInt();
 				holder = new Holder(holderType, holderCapacity);
-				System.out.println("New holder:\n"+ holder.toString()+"\n");
+				System.out.println("Initial condition of new holder:\n"+ holder.toString()+"\n");
 			}else{
-				System.out.println("Using previous holder:\n"+ holder.toString()+"\n");
+				System.out.println("Using previous holder and state:\n"+ holder.toString()+"\n");
 			}
 			System.out.println("Would you like to use another kind of coffee?\n");
 			ans = scan.next();
@@ -119,9 +133,9 @@ public class TestCoffeeMachine {
 				System.out.println("Enter the coffee weight in ounces:\n");
 				coffeeWeight = scan.nextInt();
 				coffee = new Coffee(coffeeBrand, coffeeType, coffeePrice, coffeeWeight);
-				System.out.println("New coffee: \n"+coffee.toString()+"\n");
+				System.out.println("Initial condition of new coffee: \n"+coffee.toString()+"\n");
 			}else{
-				System.out.println("Using previous coffee: \n"+coffee.toString()+"\n");	
+				System.out.println("Using previous coffee and state: \n"+coffee.toString()+"\n");	
 			}
 			
 			System.out.println("Would you like to turn the machine on? y/n\n");
@@ -133,7 +147,12 @@ public class TestCoffeeMachine {
 					coffeeMaker.setPower(true);
 				}
 			}else{
-				coffeeMaker.setPower(false);
+				if(!coffeeMaker.getPower()){
+					System.out.println("Power is already off!\n");
+				}else{
+					coffeeMaker.setPower(false);
+					System.out.println("Setting power off: machine powerState = "+coffeeMaker.getPower()+"\n");
+				}
 			}
 			System.out.println("Would you like to place the holder? y/n\n");
 			ans = scan.next();
@@ -170,12 +189,24 @@ public class TestCoffeeMachine {
 			amtToBrew =scan.nextInt();
 			
 			System.out.println("Attempting to brew a cup o' joe!");
+			
+			System.out.println("This is the pre-condition of the test run in interactive mode before brew():\n\n"
+					+coffeeMaker.toString()
+					+holder.toString()
+					+coffee.toString());
+			
 			coffeeMaker.brew(amtToBrew, holder, coffee);
-	
+			
+			System.out.println("This is the post-condition of the test run in interactive mode after brew():\n\n"
+					+coffeeMaker.toString()
+					+holder.toString()
+					+coffee.toString());
+			
 			System.out.println("Would you like to brew anther cup?"); 
 			ans = scan.next();
 		}while(!ans.equals("") &&( ans.equals("Y") || ans.equals("y") || ans.equals("yes") || ans.equals("Yes")));
 		System.out.println("Thanks for using this virtual Coffee Machine! Exiting system.");
 		System.exit(0);
 	}
+	
 }
