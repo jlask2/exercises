@@ -1,6 +1,3 @@
-/**
- * 
- */
 package coffeemachine;
 
 /**
@@ -44,9 +41,6 @@ public final class Holder {
 		currentFill = 0;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Holder [type=" + type + ", fillingCapacity=" + fillingCapacity

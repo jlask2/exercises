@@ -207,6 +207,5 @@ public class TestCoffeeMachine {
 		}while(!ans.equals("") &&( ans.equals("Y") || ans.equals("y") || ans.equals("yes") || ans.equals("Yes")));
 		System.out.println("Thanks for using this virtual Coffee Machine! Exiting system.");
 		System.exit(0);
-	}
-	
+	}	
 }

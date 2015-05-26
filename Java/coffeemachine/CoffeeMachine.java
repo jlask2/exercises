@@ -10,7 +10,7 @@ package coffeemachine;
 public abstract class CoffeeMachine {
 	
 	protected Holder holder;
-	private Coffee typeOfCoffee;
+	protected Coffee typeOfCoffee;
 	
 	abstract protected boolean isPowered();
 	abstract protected void setPower(boolean power);

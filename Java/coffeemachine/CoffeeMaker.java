@@ -19,7 +19,6 @@ public class CoffeeMaker extends CoffeeMachine {
 	private int sizeOfCoffeeToBeBrewed;
 	private int currentWater;
 	private boolean holderPresent;
-	private boolean occupiedWithHolder;
 	private boolean power;
 	
 	private int amountOfCoffeeBrewed;	
@@ -40,7 +39,7 @@ public class CoffeeMaker extends CoffeeMachine {
 	}
 	
 	@Override
-	protected boolean isPowered() {
+	public boolean isPowered() {
 		if(power){
 			return true;
 		}else{
@@ -54,12 +53,12 @@ public class CoffeeMaker extends CoffeeMachine {
 	}
 
 	@Override
-	public void setHolder(Holder selectedHolder){
+	protected void setHolder(Holder selectedHolder){
 	    holder = selectedHolder;
 	}
 	
 	@Override
-	public void setHolderPresence(){
+	protected void setHolderPresence(){
 		if(!holderPresent){
 			holderPresent = true;
 		}else{
@@ -68,7 +67,7 @@ public class CoffeeMaker extends CoffeeMachine {
 	}
 	
 	@Override
-	public void removeHolder(){
+	protected void removeHolder(){
 		if(holder == null || (!isHolderPresent())){
 			System.out.println("There is no holder to remove!\n");
 		}else{

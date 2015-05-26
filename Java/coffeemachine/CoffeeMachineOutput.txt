@@ -1,0 +1,244 @@
+This is the initial test run of my Virtual Coffee Machine System.
+
+This is the pre-condition of the test run with hard coded values:
+
+Specifications of Coffee Machine:
+	Brand: 				Keurig 2.0
+	AcceptedTypesOfCoffee: 		coffee expresso k-cups 
+	Price: 				120.0
+	Model: 				123456
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		12
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	0
+Holder [type=Cup, fillingCapacity=10, currentFill=0]
+Coffee [brand=Maxwell House, type=k-cup, price=1.0, size=8]
+
+Cup O' Java Successfully Brewed! 
+
+
+This is the post-condition of the test run with hard coded values:
+
+Specifications of Coffee Machine:
+	Brand: 				Keurig 2.0
+	AcceptedTypesOfCoffee: 		coffee expresso k-cups 
+	Price: 				120.0
+	Model: 				123456
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		4
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	8
+Holder [type=Cup, fillingCapacity=10, currentFill=8]
+Coffee [brand=Maxwell House, type=k-cup, price=1.0, size=8]
+
+
+Here is a interactive loop to test different aspects of the system.
+
+
+Would you like to use a different coffee machine?
+y
+Enter the machine brand name:
+
+Bunn
+Enter the machine price:
+
+120.00
+Enter the machine model number:
+
+234567
+Enter the accepted types of coffee (i.e. "coffee", "tea", "k-cups") :
+
+coffee tea
+Initial condition of new machine:
+Specifications of Coffee Machine:
+	Brand: 				Bunn
+	AcceptedTypesOfCoffee: 		coffee tea 
+	Price: 				120.0
+	Model: 				234567
+Stats of Coffee Machine System State: 
+	Powered ON: 			false
+	Current Water Level:		0
+	Cup Holder Occuppied: 		false
+	Amount of Coffee Brewed: 	0
+
+
+Would you like to use a new holder?
+
+y
+Enter the type of Holder you wish to use:
+
+pot
+Enter the max filling capacity of this holder:
+
+30
+Initial condition of new holder:
+Holder [type=pot, fillingCapacity=30, currentFill=0]
+
+
+Would you like to use another kind of coffee?
+
+y
+Enter the coffee brand name:
+
+Foldgers
+Enter the coffee type (i.e. "coffee", "tea", "k-cup"):
+
+coffee
+Enter the coffee price:
+
+1.20
+Enter the coffee weight in ounces:
+
+4
+Initial condition of new coffee: 
+Coffee [brand=Foldgers, type=coffee, price=1.2, size=4]
+
+
+Would you like to turn the machine on? y/n
+
+y
+Would you like to place the holder? y/n
+
+y
+The curernt water level for this machine is: 0 ounces
+Would you like to fill the machine with water? y/n
+
+y
+How much water would you like to add?
+
+25
+How much would you like to brew?
+
+20
+Attempting to brew a cup o' joe!
+This is the pre-condition of the test run in interactive mode before brew():
+
+Specifications of Coffee Machine:
+	Brand: 				Bunn
+	AcceptedTypesOfCoffee: 		coffee tea 
+	Price: 				120.0
+	Model: 				234567
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		25
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	0
+Holder [type=pot, fillingCapacity=30, currentFill=0]
+Coffee [brand=Foldgers, type=coffee, price=1.2, size=4]
+
+Cup O' Java Successfully Brewed! 
+
+
+This is the post-condition of the test run in interactive mode after brew():
+
+Specifications of Coffee Machine:
+	Brand: 				Bunn
+	AcceptedTypesOfCoffee: 		coffee tea 
+	Price: 				120.0
+	Model: 				234567
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		5
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	20
+Holder [type=pot, fillingCapacity=30, currentFill=20]
+Coffee [brand=Foldgers, type=coffee, price=1.2, size=4]
+
+Would you like to brew anther cup?
+y
+Would you like to use a different coffee machine?
+n
+Using the previous machine and state:
+Specifications of Coffee Machine:
+	Brand: 				Bunn
+	AcceptedTypesOfCoffee: 		coffee tea 
+	Price: 				120.0
+	Model: 				234567
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		5
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	20
+
+
+Would you like to use a new holder?
+
+n
+Using previous holder and state:
+Holder [type=pot, fillingCapacity=30, currentFill=20]
+
+
+Would you like to use another kind of coffee?
+
+n
+Using previous coffee and state: 
+Coffee [brand=Foldgers, type=coffee, price=1.2, size=4]
+
+
+Would you like to turn the machine on? y/n
+
+y
+This machine is already on!
+
+Would you like to place the holder? y/n
+
+y
+This machine is occupied
+ Would you like to replace the holder with the current one? y/n
+
+y
+The curernt water level for this machine is: 5 ounces
+Would you like to fill the machine with water? y/n
+
+y
+How much water would you like to add?
+
+25
+Too much water trying to be added to machine. 
+Filling current water level to max water level 25
+How much would you like to brew?
+
+15
+Attempting to brew a cup o' joe!
+This is the pre-condition of the test run in interactive mode before brew():
+
+Specifications of Coffee Machine:
+	Brand: 				Bunn
+	AcceptedTypesOfCoffee: 		coffee tea 
+	Price: 				120.0
+	Model: 				234567
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		25
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	20
+Holder [type=pot, fillingCapacity=30, currentFill=20]
+Coffee [brand=Foldgers, type=coffee, price=1.2, size=4]
+
+
+This will result in a overflow (In the physical sense, your coffeee is spilling!)
+
+Cup O' Java Successfully Brewed! 
+
+
+This is the post-condition of the test run in interactive mode after brew():
+
+Specifications of Coffee Machine:
+	Brand: 				Bunn
+	AcceptedTypesOfCoffee: 		coffee tea 
+	Price: 				120.0
+	Model: 				234567
+Stats of Coffee Machine System State: 
+	Powered ON: 			true
+	Current Water Level:		10
+	Cup Holder Occuppied: 		true
+	Amount of Coffee Brewed: 	15
+Holder [type=pot, fillingCapacity=30, currentFill=30]
+Coffee [brand=Foldgers, type=coffee, price=1.2, size=4]
+
+Would you like to brew anther cup?
+n
+Thanks for using this virtual Coffee Machine! Exiting system.
+
