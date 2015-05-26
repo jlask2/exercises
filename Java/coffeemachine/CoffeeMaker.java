@@ -1,12 +1,14 @@
 package coffeemachine;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class CoffeeMaker extends CoffeeMachine {
 
 	/**Members for Specs*/
 	private String brand;
-	private String[] acceptedTypesOfCoffee;
+	private ArrayList<String> acceptedTypesOfCoffee;
 	private float price;
 	private int model;
 	
@@ -16,33 +18,23 @@ public class CoffeeMaker extends CoffeeMachine {
 	/**Members for state*/
 	private int sizeOfCoffeeToBeBrewed;
 	private int currentWater;
+	private boolean holderPresent;
 	private boolean occupiedWithHolder;
 	private boolean power;
 	
 	private int amountOfCoffeeBrewed;	
 	
 	final private int MAXWATERCAPACITY = 25;
-
-	/*public CoffeeMaker(String brand, String[] acceptedTypesOfCoffee, float price, int model,
-			int currentWater, boolean occupiedWithHolder, boolean power, int amountOfCoffeeBrewed){
-		this.brand = brand;
-		this.acceptedTypesOfCoffee = acceptedTypesOfCoffee;
-		this.price = price;
-		this.model = model;
-		this.currentWater = currentWater;
-		this.occupiedWithHolder = occupiedWithHolder;
-		this.power = power;
-		this.amountOfCoffeeBrewed = amountOfCoffeeBrewed;
-	}*/
 	
-	public CoffeeMaker(String brand, String[] acceptedTypesOfCoffee, float price, int model){
+	public CoffeeMaker(String brand, ArrayList<String> acceptedTypesOfCoffee, float price, int model){
 		this.brand = brand;
 		this.acceptedTypesOfCoffee = acceptedTypesOfCoffee;
 		this.price = price;
 		this.model = model;
 		specString = "Specifications of Coffee Machine:\n\tBrand: \t"+this.brand+"\n\tAcceptedTypesOfCoffee: \t";
-		for(int i = 0; i < acceptedTypesOfCoffee.length; i++){
-			specString += acceptedTypesOfCoffee[i]+" ";
+		Iterator<String> ite = this.acceptedTypesOfCoffee.iterator();
+		while(ite.hasNext()){
+			specString += ite.next()+" ";
 		}
 		specString += "\n\tPrice: \t"+this.price+"\n\tModel: \t"+this.model+"\n";
 	}
@@ -67,18 +59,26 @@ public class CoffeeMaker extends CoffeeMachine {
 	}
 	
 	@Override
-	protected boolean holderPresentState() {
-		if(holder == null || !holder.isHolderPresent() || occupiedWithHolder){
-			return false;
+	public void setHolderPresence(){
+		if(!holderPresent){
+			holderPresent = true;
 		}else{
-			occupiedWithHolder = true;
-			return true;
+			System.out.println("The Coffee Machine already has a holder present");
 		}
 	}
 	
 	@Override
-	protected boolean enoughWater(int sizeOfCoffeToBeBrewed) {
-		if(currentWater < sizeOfCoffeeToBeBrewed){
+	public void removeHolder(){
+		if(holder == null || (!isHolderPresent())){
+			System.out.println("There is no holder to remove!\n");
+		}else{
+			holderPresent = false;
+		}
+	}
+	
+	@Override
+	protected boolean enoughWater(int amtOfCoffeToBeBrewed) {
+		if(currentWater < amtOfCoffeToBeBrewed){
 			return false;
 		}else{
 			return true;
@@ -96,8 +96,8 @@ public class CoffeeMaker extends CoffeeMachine {
 	}
 	
 	@Override
-	protected boolean holderFillCapacityExceeded(int sizeOfCoffeeToBeBrewed, Holder holder){//int holderFillingCapacity) {
-		if(holder.getSize()/*FillingCapacity*/ < sizeOfCoffeeToBeBrewed){
+	protected boolean holderFillCapacityExceeded(int amtOfCoffeeToBeBrewed, Holder holder){
+		if(holder.getSize() < amtOfCoffeeToBeBrewed){
 			return true;
 		}else{
 			return false;
@@ -110,7 +110,7 @@ public class CoffeeMaker extends CoffeeMachine {
 		String ans = "";
 		int addedWater = 0;
 		if(isPowered()){
-			if(holderPresentState()){
+			if(isHolderPresent()){
 				if(enoughWater(sizeSelected)){
 					if(!holderFillCapacityExceeded(sizeSelected, holder)){
 						currentWater -= sizeSelected;
@@ -125,16 +125,54 @@ public class CoffeeMaker extends CoffeeMachine {
 				}else{
 					System.out.println("Would you like to add some water? y/n \n");
 					ans = scan.next();
-					if(ans != "" &&( ans == "Y" || ans == "y" || ans == "yes" || ans == "Yes")){
+					if(!ans.equals("") &&( ans.equals("Y") || ans.equals("y") || ans.equals("yes") || ans.equals("Yes"))){
 						System.out.println("Please enter the amount of water you would like to add in ounces.\n"
 								+ "The current water level is now "+currentWater+" ounces \n");
 						addedWater = scan.nextInt();
 						fillWater(addedWater);
 						System.out.println("The current water level is now "+currentWater+" ounces \n");
+						if(!holderFillCapacityExceeded(sizeSelected, holder)){
+							currentWater -= sizeSelected;
+							if(currentWater < 0){
+								amountOfCoffeeBrewed = sizeSelected + currentWater;
+								currentWater = 0;
+							}else{
+								amountOfCoffeeBrewed = sizeSelected;
+							}
+							System.out.println("Cup O' Java Successfully Brewed! \n\n"+toString());
+						}
 					}else{
-						
+						if(!holderFillCapacityExceeded(sizeSelected, holder)){
+							currentWater -= sizeSelected;
+							if(currentWater < 0){
+								amountOfCoffeeBrewed = sizeSelected + currentWater;
+								currentWater = 0;
+							}else{
+								amountOfCoffeeBrewed = sizeSelected;
+							}
+							System.out.println("Cup O' Java Successfully Brewed! \n\n"+toString());
+						}
 					}
 				}
+			}else{
+				System.out.println("Would you like to place a holder? y/n\n");
+				ans = scan.next();
+				if(!ans.equals("") &&( ans.equals("Y") || ans.equals("y") || ans.equals("yes") || ans.equals("Yes"))){
+					setHolder(holder);
+					setHolderPresence();
+					System.out.println("Holder has been placed.\n");
+				}else{
+					System.out.println("Remaining in waiting state");
+				}
+			}
+		}else{
+			System.out.println("Would you like to turn the Coffee Machine On? y/n\n");
+			ans = scan.next();
+			if(!ans.equals("") &&( ans.equals("Y") || ans.equals("y") || ans.equals("yes") || ans.equals("Yes"))){
+				power = true;
+				System.out.println("Coffee Machine is powered on: Power State = "+power+"\n");
+			}else{
+				System.out.println("Remaining in waiting state");
 			}
 		}
 	}
@@ -144,7 +182,7 @@ public class CoffeeMaker extends CoffeeMachine {
 		stateString = specString+"Stats of Coffee Machine System State: \n";
 		stateString += "\tPowered ON: \t"+power+"\n\tCurrent Water Level:\t"
 				+currentWater+"\n\tCup Holder Occuppied: \t"
-				+occupiedWithHolder+"\n\tAmount of Coffee Brewed: \t"
+				+holderPresent+"\n\tAmount of Coffee Brewed: \t"
 				+amountOfCoffeeBrewed+"\n";
 		return stateString;
 	}
@@ -157,11 +195,11 @@ public class CoffeeMaker extends CoffeeMachine {
 		return currentWater;
 	}
 	
-	public boolean getOccupied(){
-		return occupiedWithHolder;
-	}
-	
 	public int getCoffeeBrewed(){
 		return amountOfCoffeeBrewed;
+	}
+	
+	public boolean isHolderPresent() {
+		return holderPresent;
 	}
 }

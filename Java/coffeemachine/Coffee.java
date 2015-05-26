@@ -7,7 +7,7 @@ package coffeemachine;
  * @author Jay
  *
  */
-public final class Coffee {
+public final class Coffee extends CBeverages{
 
 	private String brand;
 	private String type;
@@ -36,4 +36,14 @@ public final class Coffee {
 	public int getSize() {
 		return size;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Coffee [brand=" + brand + ", type=" + type + ", price=" + price
+				+ ", size=" + size + "]\n";
+	}
+	
 }
